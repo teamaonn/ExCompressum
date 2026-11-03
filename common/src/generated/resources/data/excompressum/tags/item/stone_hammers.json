@@ -11,6 +11,10 @@
     {
       "id": "fabricaeexnihilo:stone_hammer",
       "required": false
+    },
+    {
+      "id": "exnihiloomnia:hammer_stone",
+      "required": false
     }
   ]
 }

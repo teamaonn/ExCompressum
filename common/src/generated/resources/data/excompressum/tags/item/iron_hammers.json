@@ -11,6 +11,10 @@
     {
       "id": "fabricaeexnihilo:iron_hammer",
       "required": false
+    },
+    {
+      "id": "exnihiloomnia:hammer_iron",
+      "required": false
     }
   ]
 }

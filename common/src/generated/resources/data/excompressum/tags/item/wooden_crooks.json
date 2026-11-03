@@ -11,6 +11,10 @@
     {
       "id": "fabricaeexnihilo:wooden_crook",
       "required": false
+    },
+    {
+      "id": "exnihiloomnia:crook_wood",
+      "required": false
     }
   ]
 }

@@ -11,6 +11,10 @@
     {
       "id": "fabricaeexnihilo:netherite_hammer",
       "required": false
+    },
+    {
+      "id": "exnihiloomnia:hammer_netherite",
+      "required": false
     }
   ]
 }

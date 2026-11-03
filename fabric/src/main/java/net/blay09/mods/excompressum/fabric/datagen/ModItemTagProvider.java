@@ -19,6 +19,20 @@ public class ModItemTagProvider extends FabricTagsProvider.ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider lookup) {
+        // Omnia item names differ from Sequentia and Fabricae. Keep these optional
+        // so the shared generated data remains usable by the other loaders.
+        getOrCreateRawBuilder(ModItemTags.WOODEN_CROOKS).addOptionalElement(Identifier.fromNamespaceAndPath("exnihiloomnia", "crook_wood"));
+        getOrCreateRawBuilder(ModItemTags.DUSTS).addOptionalElement(Identifier.fromNamespaceAndPath("exnihiloomnia", "dust"));
+        getOrCreateRawBuilder(ModItemTags.CRUSHED_END_STONES).addOptionalElement(Identifier.fromNamespaceAndPath("exnihiloomnia", "gravel_ender"));
+        getOrCreateRawBuilder(ModItemTags.IRON_HAMMERS).addOptionalElement(Identifier.fromNamespaceAndPath("exnihiloomnia", "hammer_iron"));
+        getOrCreateRawBuilder(ModItemTags.DIAMOND_HAMMERS).addOptionalElement(Identifier.fromNamespaceAndPath("exnihiloomnia", "hammer_diamond"));
+        getOrCreateRawBuilder(ModItemTags.WOODEN_HAMMERS).addOptionalElement(Identifier.fromNamespaceAndPath("exnihiloomnia", "hammer_wood"));
+        getOrCreateRawBuilder(ModItemTags.NETHERITE_HAMMERS).addOptionalElement(Identifier.fromNamespaceAndPath("exnihiloomnia", "hammer_netherite"));
+        getOrCreateRawBuilder(ModItemTags.HEAVY_SIEVES).addOptionalElement(Identifier.fromNamespaceAndPath("exnihiloomnia", "heavy_sieve"));
+        getOrCreateRawBuilder(ModItemTags.STONE_HAMMERS).addOptionalElement(Identifier.fromNamespaceAndPath("exnihiloomnia", "hammer_stone"));
+        getOrCreateRawBuilder(ModItemTags.GOLDEN_HAMMERS).addOptionalElement(Identifier.fromNamespaceAndPath("exnihiloomnia", "hammer_gold"));
+        getOrCreateRawBuilder(ModItemTags.CRUSHED_NETHERRACKS).addOptionalElement(Identifier.fromNamespaceAndPath("exnihiloomnia", "gravel_nether"));
+        getOrCreateRawBuilder(ModItemTags.SIEVES).addOptionalElement(Identifier.fromNamespaceAndPath("exnihiloomnia", "sieve_wood"));
         getOrCreateRawBuilder(ModItemTags.SIEVES).addOptionalElement(sequentia("acacia_sieve"))
                 .addOptionalElement(sequentia("birch_sieve"))
                 .addOptionalElement(sequentia("dark_oak_sieve"))

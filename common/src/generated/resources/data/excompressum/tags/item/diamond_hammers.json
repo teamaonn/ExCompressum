@@ -11,6 +11,10 @@
     {
       "id": "fabricaeexnihilo:diamond_hammer",
       "required": false
+    },
+    {
+      "id": "exnihiloomnia:hammer_diamond",
+      "required": false
     }
   ]
 }

@@ -123,6 +123,10 @@
     {
       "id": "fabricaeexnihilo:bamboo_sieve",
       "required": false
+    },
+    {
+      "id": "exnihiloomnia:sieve_wood",
+      "required": false
     }
   ]
 }

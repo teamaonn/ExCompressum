@@ -11,6 +11,10 @@
     {
       "id": "fabricaeexnihilo:dust",
       "required": false
+    },
+    {
+      "id": "exnihiloomnia:dust",
+      "required": false
     }
   ]
 }

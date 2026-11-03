@@ -1,5 +1,8 @@
 # Ex Compressum
 
+**Omnia Fabric 26.3 compatibility:** see [OMNIA.md](OMNIA.md) for installation,
+processing rules, power requirements, and build instructions.
+
 Minecraft Mod. Attempts to reduce grind by adding pre-automation tools like compressed hammers.
 
 - [Modpack Permissions](https://mods.twelveiterations.com/permissions)

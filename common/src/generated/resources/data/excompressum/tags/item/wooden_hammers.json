@@ -11,6 +11,10 @@
     {
       "id": "fabricaeexnihilo:wooden_hammer",
       "required": false
+    },
+    {
+      "id": "exnihiloomnia:hammer_wood",
+      "required": false
     }
   ]
 }

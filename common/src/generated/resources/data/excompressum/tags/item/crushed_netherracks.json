@@ -11,6 +11,10 @@
     {
       "id": "fabricaeexnihilo:crushed_netherrack",
       "required": false
+    },
+    {
+      "id": "exnihiloomnia:gravel_nether",
+      "required": false
     }
   ]
 }

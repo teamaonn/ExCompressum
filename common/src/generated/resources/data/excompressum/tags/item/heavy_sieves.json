@@ -49,6 +49,10 @@
     {
       "id": "exdeorum:crimson_compressed_sieve",
       "required": false
+    },
+    {
+      "id": "exnihiloomnia:heavy_sieve",
+      "required": false
     }
   ]
 }

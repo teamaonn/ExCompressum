@@ -2,6 +2,9 @@ dependencies {
     implementation(libs.balmFabric) {
         changing = libs.versions.balm.get().endsWith("SNAPSHOT")
     }
-    compileOnly "curse.maven:fabricae-ex-nihilo-596911:5298550"
+    // This fork targets Omnia. Supply its release JAR without redistributing it.
+    def omniaJar = rootProject.file(providers.gradleProperty("omnia_jar")
+            .getOrElse("libs/exnihiloomnia-fabric-26.3-0.5.0-alpha.3-jei.jar"))
+    implementation files(omniaJar)
     // runtimeOnly("com.github.mattidragon:configtoolkit:1.0.0")
 }
