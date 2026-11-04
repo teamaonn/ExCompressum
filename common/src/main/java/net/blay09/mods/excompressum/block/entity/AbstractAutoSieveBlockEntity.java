@@ -362,6 +362,9 @@ public abstract class AbstractAutoSieveBlockEntity extends AbstractBaseBlockEnti
     }
 
     @Override
+    public net.minecraft.network.protocol.Packet<net.minecraft.network.protocol.game.ClientGamePacketListener> getUpdatePacket(){return net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket.create(this);}
+
+    @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         return BalmBlockEntityUtils.createUpdateTag(registries, output -> {
             saveAdditional(output);

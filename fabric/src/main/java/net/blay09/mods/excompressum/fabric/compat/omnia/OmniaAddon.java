@@ -51,17 +51,17 @@ public final class OmniaAddon implements ExNihiloProvider {
 
     public static int material(ItemLike item) {
         for (int i = 1; i <= ExNihiloOmnia.MATERIALS.length; i++) {
-            if (item.asItem() == ExNihiloOmnia.materialItem(i, false)
-                    || item.asItem() == ExNihiloOmnia.materialItem(i, true)) return i;
+            if (net.blay09.mods.excompressum.registry.UnifiedCompression.canonical(item.asItem()) == ExNihiloOmnia.materialItem(i, false)
+                    || net.blay09.mods.excompressum.registry.UnifiedCompression.canonical(item.asItem()) == ExNihiloOmnia.materialItem(i, true)) return i;
         }
         return 0;
     }
 
     public static boolean compressed(ItemLike item) {
         for (int i = 1; i <= ExNihiloOmnia.MATERIALS.length; i++) {
-            if (item.asItem() == ExNihiloOmnia.materialItem(i, true)) return true;
+            if (net.blay09.mods.excompressum.registry.UnifiedCompression.canonical(item.asItem()) == ExNihiloOmnia.materialItem(i, true)) return true;
         }
-        return item.asItem() == ExNihiloOmnia.ITEMS.get("compressed_cobblestone");
+        return net.blay09.mods.excompressum.registry.UnifiedCompression.canonical(item.asItem()) == ExNihiloOmnia.ITEMS.get("compressed_cobblestone");
     }
 
     private static int tier(@Nullable SieveMeshRegistryEntry mesh) {
@@ -74,19 +74,19 @@ public final class OmniaAddon implements ExNihiloProvider {
 
     @Override
     public boolean isHammerable(Level level, BlockState state) {
-        return !compressed(state.getBlock()) && ExNihiloOmnia.hammerOutput(state.getBlock()) != null;
+        return !compressed(state.getBlock()) && ExNihiloOmnia.hammerOutput(net.blay09.mods.excompressum.registry.UnifiedCompression.canonical(state.getBlock())) != null;
     }
 
     @Override
     public List<ItemStack> rollHammerRewards(Level level, BlockState state, ItemInstance tool, RandomSource rand) {
-        var output = ExNihiloOmnia.hammerOutput(state.getBlock());
+        var output = ExNihiloOmnia.hammerOutput(net.blay09.mods.excompressum.registry.UnifiedCompression.canonical(state.getBlock()));
         return output == null ? List.of() : List.of(new ItemStack(output));
     }
 
     @Override
     public boolean isHammerableCompressed(ItemStack input) {
         return input.getItem() instanceof BlockItem block && compressed(block.getBlock())
-                && ExNihiloOmnia.hammerOutput(block.getBlock()) != null;
+                && ExNihiloOmnia.hammerOutput(net.blay09.mods.excompressum.registry.UnifiedCompression.canonical(block.getBlock())) != null;
     }
 
     @Override

@@ -30,6 +30,23 @@ public final class OmniaTests {
     private static SieveMeshRegistryEntry mesh(int tier) {
         return Objects.requireNonNull(SieveMeshRegistry.getEntry(omnia(ExNihiloOmnia.MESHES[tier - 1])));
     }
+    @GameTest public void compressionHasOneOutputAndLegacyConversion(GameTestHelper h){
+        String[] names={"dirt","cobblestone","gravel","sand","dust","soul_sand","gravel_nether","gravel_ender"};
+        String[] old={"dirt","cobblestone","gravel","sand","dust","soul_sand","crushed_netherrack","crushed_end_stone"};
+        var map=((net.blay09.mods.excompressum.mixin.RecipeManagerAccessor)h.getLevel().getServer().getRecipeManager()).getRecipes();
+        for(int i=0;i<names.length;i++){
+            var raw=net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(net.minecraft.resources.Identifier.parse((i<4||i==5?"minecraft:":"exnihiloomnia:")+names[i]));
+            var input=net.minecraft.world.item.crafting.CraftingInput.of(3,3,java.util.stream.IntStream.range(0,9).mapToObj(n->new ItemStack(raw)).toList());
+            var recipes=map.byType(net.minecraft.world.item.crafting.RecipeType.CRAFTING).stream().filter(r->r.value().matches(input,h.getLevel())).toList();check(recipes.size()==1,"Exactly one compression recipe for "+names[i]);var output=recipes.getFirst().value().assemble(input);check(output.is(ExNihiloOmnia.ITEMS.get("compressed_"+names[i]))&&output.getCount()==1,"Compression uses canonical Omnia output");
+            var legacy=net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(net.minecraft.resources.Identifier.parse("excompressum:compressed_"+old[i]));var single=net.minecraft.world.item.crafting.CraftingInput.of(1,1,List.of(new ItemStack(legacy)));
+            var conversions=map.byType(net.minecraft.world.item.crafting.RecipeType.CRAFTING).stream().filter(r->r.value().matches(single,h.getLevel())).toList();check(conversions.size()==1&&conversions.getFirst().value().assemble(single).is(output.getItem()),"Legacy conversion is unambiguous and lossless");
+            var decompressed=net.minecraft.world.item.crafting.CraftingInput.of(1,1,List.of(output));var reverse=map.byType(net.minecraft.world.item.crafting.RecipeType.CRAFTING).stream().filter(r->r.value().matches(decompressed,h.getLevel())).toList();check(reverse.size()==1&&reverse.getFirst().value().assemble(decompressed).getCount()==9,"Decompression returns exactly nine originals");
+        }h.succeed();
+    }
+    @GameTest public void manualHeavySieveKeepsMeshContentAndSyncsProgress(GameTestHelper h){
+        var pos=h.absolutePos(new BlockPos(2,2,2));h.getLevel().setBlock(pos,ModBlocks.heavySieves.get(net.blay09.mods.excompressum.block.HeavySieveType.OAK).defaultBlockState(),3);var sieve=(net.blay09.mods.excompressum.block.entity.HeavySieveBlockEntity)h.getLevel().getBlockEntity(pos);
+        sieve.setMeshStack(omnia("mesh_diamond"));var fake=net.fabricmc.fabric.api.entity.FakePlayer.get(h.getLevel());fake.setGameMode(net.minecraft.world.level.GameType.SURVIVAL);var input=omnia("compressed_dirt");input.setCount(2);check(sieve.addSiftable(h.getLevel(),fake,input)&&input.getCount()==1,"Heavy sieve consumes one canonical block");sieve.processContents(fake);check(sieve.getProgress()>0&&sieve.getProgress()<1&&!sieve.getCurrentStack().isEmpty(),"Partial work retains material");check(sieve.getUpdatePacket()!=null,"Native packet carries current mesh, material and animation state");var copy=(net.blay09.mods.excompressum.block.entity.HeavySieveBlockEntity)net.minecraft.world.level.block.entity.BlockEntity.loadStatic(pos,sieve.getBlockState(),sieve.saveWithFullMetadata(h.getLevel().registryAccess()),h.getLevel().registryAccess());check(copy!=null&&copy.getProgress()==sieve.getProgress()&&copy.getMeshStack().is(sieve.getMeshStack().getItem()),"Saved mesh and progress survive reload");h.succeed();
+    }
     @GameTest public void liveDropsMatchForEveryMaterialAndMesh(GameTestHelper h) {
         check(ExNihilo.getInstance() instanceof OmniaAddon, "Omnia provider must be installed");
         var sieve = ModBlocks.autoSieve.asBlock().defaultBlockState();

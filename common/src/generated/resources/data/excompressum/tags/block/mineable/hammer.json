@@ -17,12 +17,12 @@
     "minecraft:netherrack",
     "minecraft:sand",
     "excompressum:compressed_andesite",
-    "excompressum:compressed_cobblestone",
+    "exnihiloomnia:compressed_cobblestone",
     "excompressum:compressed_diorite",
     "excompressum:compressed_end_stone",
     "excompressum:compressed_granite",
-    "excompressum:compressed_gravel",
+    "exnihiloomnia:compressed_gravel",
     "excompressum:compressed_netherrack",
-    "excompressum:compressed_sand"
+    "exnihiloomnia:compressed_sand"
   ]
 }

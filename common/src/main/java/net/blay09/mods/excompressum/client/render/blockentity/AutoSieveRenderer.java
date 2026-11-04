@@ -45,6 +45,7 @@ public class AutoSieveRenderer<T extends AbstractAutoSieveBlockEntity> implement
         public final BlockModelRenderState mesh = new BlockModelRenderState();
         public final BlockModelRenderState sieve = new BlockModelRenderState();
         public boolean skip;
+        public UUID fallbackSkin=new UUID(0,0);
         public Direction facing = Direction.NORTH;
         public boolean waterlogged;
         public float progress;
@@ -90,10 +91,11 @@ public class AutoSieveRenderer<T extends AbstractAutoSieveBlockEntity> implement
         }
 
         renderState.skip = blockEntity.isUgly();
-        renderState.progress = blockEntity.getProgress();
+        renderState.fallbackSkin=new UUID(0,blockEntity.getBlockPos().asLong());
+        renderState.progress = Float.isFinite(blockEntity.getProgress()) ? net.minecraft.util.Mth.clamp(blockEntity.getProgress(),0F,1F) : 0F;
 
         final var meshModelName = blockEntity.getSieveMesh() != null ? blockEntity.getSieveMesh().getModelName() : null;
-        final var meshModel = meshModelName != null ? ModModels.meshes.get(meshModelName).asBlockStateModel() : null;
+        final var meshModel = meshModelName != null ? ModModels.meshes.containsKey(meshModelName) ? ModModels.meshes.get(meshModelName).asBlockStateModel() : null : null;
         if (meshModel != null) {
             final var meshParts = renderState.mesh.setupModel(new Matrix4f(), false);
             meshModel.collectParts(renderState.mesh.scratchRandomSource(42), meshParts);
@@ -108,7 +110,7 @@ public class AutoSieveRenderer<T extends AbstractAutoSieveBlockEntity> implement
         renderState.avatar.animationType = blockEntity.getAnimationType();
         renderState.avatar.armAngle = blockEntity.armAngle;
 
-        final var contentState = StupidUtils.getStateFromItemStack(blockEntity.getCurrentStack());
+        final var contentState = net.blay09.mods.excompressum.registry.UnifiedCompression.surface(StupidUtils.getStateFromItemStack(blockEntity.getCurrentStack()));
         if (!contentState.isAir()) {
             blockModelResolver.update(renderState.content, contentState, CONTENT_BLOCK_DISPLAY_CONTEXT);
         } else {
@@ -138,7 +140,7 @@ public class AutoSieveRenderer<T extends AbstractAutoSieveBlockEntity> implement
         poseStack.rotateDegrees(Axis.YP, 90);
         poseStack.translate(0f, -0.65f, 0.25f);
         poseStack.scale(0.4f, 0.4f, 0.4f);
-        final var skin = getPlayerSkin(renderState.profile);
+        final var skin = getPlayerSkin(renderState.profile,renderState.fallbackSkin);
         final var playerModel = getPlayerModel(skin);
         final var renderType = RenderTypes.entityCutout(skin.body().texturePath());
         submitNodeCollector.submitModel(playerModel, renderState.avatar, poseStack, renderType, renderState.lightCoords, OverlayTexture.NO_OVERLAY, 0);
@@ -181,7 +183,7 @@ public class AutoSieveRenderer<T extends AbstractAutoSieveBlockEntity> implement
             final var contentScaleXZ = 0.88f;
             final var contentBaseScaleY = 0.5f;
             poseStack.translate(contentOffset, meshY, contentOffset);
-            poseStack.scale(contentScaleXZ, contentBaseScaleY - renderState.progress * contentBaseScaleY, contentScaleXZ);
+            poseStack.scale(contentScaleXZ, Math.max(.01F,contentBaseScaleY - renderState.progress * contentBaseScaleY), contentScaleXZ);
             renderState.content.submit(poseStack, submitNodeCollector, renderState.lightCoords, OverlayTexture.NO_OVERLAY, 0);
             poseStack.popPose();
         }
@@ -190,11 +192,11 @@ public class AutoSieveRenderer<T extends AbstractAutoSieveBlockEntity> implement
         poseStack.popPose();
     }
 
-    private PlayerSkin getPlayerSkin(@Nullable ResolvableProfile profile) {
+    private PlayerSkin getPlayerSkin(@Nullable ResolvableProfile profile,UUID fallback) {
         if (profile != null) {
             return Minecraft.getInstance().playerSkinRenderCache().getOrDefault(profile).playerSkin();
         }
-        return DefaultPlayerSkin.get(UUID.randomUUID());
+        return DefaultPlayerSkin.get(fallback);
     }
 
     private TinyHumanModel getPlayerModel(@Nullable PlayerSkin skin) {

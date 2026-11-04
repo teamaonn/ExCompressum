@@ -1,11 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "building",
   "ingredients": [
     "excompressum:compressed_dirt"
   ],
   "result": {
-    "count": 9,
-    "id": "minecraft:dirt"
+    "id": "exnihiloomnia:compressed_dirt"
   }
 }

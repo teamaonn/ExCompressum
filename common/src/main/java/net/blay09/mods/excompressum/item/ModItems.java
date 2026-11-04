@@ -95,7 +95,7 @@ public class ModItems {
                             ModBlocks.heavySieves.forEach((type, block) -> output.accept(block));
                             ModBlocks.woodenCrucibles.forEach((type, block) -> output.accept(block));
                             ModBlocks.baits.forEach((type, block) -> output.accept(block));
-                            ModBlocks.compressedBlocks.forEach((type, block) -> output.accept(block));
+                            ModBlocks.compressedBlocks.forEach((type, block) -> {if(!net.blay09.mods.excompressum.registry.UnifiedCompression.legacy(block.asItem()))output.accept(block);});
                         }));
     }
 

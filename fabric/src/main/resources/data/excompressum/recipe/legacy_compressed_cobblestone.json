@@ -1,11 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "building",
   "ingredients": [
     "excompressum:compressed_cobblestone"
   ],
   "result": {
-    "count": 9,
-    "id": "minecraft:cobblestone"
+    "id": "exnihiloomnia:compressed_cobblestone"
   }
 }

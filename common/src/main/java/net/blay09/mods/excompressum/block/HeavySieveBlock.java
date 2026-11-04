@@ -113,7 +113,7 @@ public class HeavySieveBlock extends BaseEntityBlock {
         if (!level.isClientSide() && player.isShiftKeyDown()) {
             ItemStack meshStack = heavySieve.getMeshStack();
             if (!meshStack.isEmpty() && heavySieve.getCurrentStack().isEmpty()) {
-                if (player.getInventory().add(meshStack)) {
+                if (!player.getInventory().add(meshStack)) {
                     level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, meshStack));
                 }
                 heavySieve.setMeshStack(ItemStack.EMPTY);

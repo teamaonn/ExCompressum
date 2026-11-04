@@ -3,6 +3,11 @@
   "id": "excompressum-test",
   "version": "1.0.0",
   "entrypoints": {
-    "fabric-gametest": ["net.blay09.mods.excompressum.fabric.compat.omnia.OmniaTests"]
+    "fabric-gametest": [
+      "net.blay09.mods.excompressum.fabric.compat.omnia.OmniaTests"
+    ],
+    "fabric-client-gametest": [
+      "net.blay09.mods.excompressum.fabric.compat.omnia.CompatClientTests"
+    ]
   }
 }

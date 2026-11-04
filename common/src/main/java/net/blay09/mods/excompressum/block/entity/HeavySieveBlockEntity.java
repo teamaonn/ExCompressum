@@ -22,6 +22,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
@@ -190,6 +191,9 @@ public class HeavySieveBlockEntity extends BlockEntity {
     }
 
     @Override
+    public net.minecraft.network.protocol.Packet<net.minecraft.network.protocol.game.ClientGamePacketListener> getUpdatePacket(){return net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket.create(this);}
+
+    @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         return BalmBlockEntityUtils.createUpdateTag(registries, this::saveAdditional);
     }
@@ -223,7 +227,8 @@ public class HeavySieveBlockEntity extends BlockEntity {
     @Override
     public void preRemoveSideEffects(BlockPos pos, BlockState state) {
         super.preRemoveSideEffects(pos, state);
-        if (level != null && !getMeshStack().isEmpty()) {
+        if (level != null && !level.isClientSide() && !currentStack.isEmpty()){Block.popResource(level,pos,currentStack.copy());currentStack=ItemStack.EMPTY;}
+        if (level != null && !level.isClientSide() && !getMeshStack().isEmpty()) {
             level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, getMeshStack()));
         }
     }

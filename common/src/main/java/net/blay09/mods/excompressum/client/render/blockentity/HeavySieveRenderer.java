@@ -23,13 +23,14 @@ public class HeavySieveRenderer implements BlockEntityRenderer<HeavySieveBlockEn
     public static class HeavySieveRenderState extends BlockEntityRenderState {
         public final BlockModelRenderState mesh = new BlockModelRenderState();
         public float progress;
-        public final ItemStackRenderState item = new ItemStackRenderState();
+        public final net.minecraft.client.renderer.block.BlockModelRenderState item = new net.minecraft.client.renderer.block.BlockModelRenderState();
     }
 
-    private final ItemModelResolver itemModelResolver;
+    private final net.minecraft.client.renderer.block.BlockModelResolver blockModelResolver;
+    private static final net.minecraft.client.renderer.block.model.BlockDisplayContext CONTENT = net.minecraft.client.renderer.block.model.BlockDisplayContext.create();
 
     public HeavySieveRenderer(BlockEntityRendererProvider.Context context) {
-        itemModelResolver = context.itemModelResolver();
+        blockModelResolver = context.blockModelResolver();
     }
 
     @Override
@@ -42,7 +43,7 @@ public class HeavySieveRenderer implements BlockEntityRenderer<HeavySieveBlockEn
         BlockEntityRenderer.super.extractRenderState(blockEntity, renderState, delta, vec, crumblingOverlay);
 
         final var meshModelName = blockEntity.getSieveMesh() != null ? blockEntity.getSieveMesh().getModelName() : null;
-        final var meshModel = meshModelName != null ? ModModels.meshes.get(meshModelName).asBlockStateModel() : null;
+        final var meshModel = meshModelName != null ? ModModels.meshes.containsKey(meshModelName) ? ModModels.meshes.get(meshModelName).asBlockStateModel() : null : null;
         if (meshModel != null) {
             final var meshParts = renderState.mesh.setupModel(new Matrix4f(), false);
             meshModel.collectParts(renderState.mesh.scratchRandomSource(42), meshParts);
@@ -50,9 +51,10 @@ public class HeavySieveRenderer implements BlockEntityRenderer<HeavySieveBlockEn
             renderState.mesh.clear();
         }
 
-        renderState.progress = blockEntity.getProgress();
+        renderState.progress = Float.isFinite(blockEntity.getProgress()) ? net.minecraft.util.Mth.clamp(blockEntity.getProgress(),0F,1F) : 0F;
 
-        itemModelResolver.updateForTopItem(renderState.item, blockEntity.getCurrentStack(), ItemDisplayContext.FIXED, blockEntity.getLevel(), null, 0);
+        var content = net.blay09.mods.excompressum.registry.UnifiedCompression.surface(net.blay09.mods.excompressum.utils.StupidUtils.getStateFromItemStack(blockEntity.getCurrentStack()));
+        if(content.isAir())renderState.item.clear();else blockModelResolver.update(renderState.item,content,CONTENT);
     }
 
     @Override
@@ -64,7 +66,7 @@ public class HeavySieveRenderer implements BlockEntityRenderer<HeavySieveBlockEn
             poseStack.pushPose();
             poseStack.translate(0.0625f, 0.5625f, 0.0625f);
             float tt = 0.42f;
-            poseStack.scale(0.88f, tt - renderState.progress * tt, 0.88f);
+            poseStack.scale(0.88f, Math.max(.01F,tt - renderState.progress * tt), 0.88f);
             renderState.item.submit(poseStack, submitNodeCollector, renderState.lightCoords, OverlayTexture.NO_OVERLAY, 0);
             poseStack.popPose();
         }

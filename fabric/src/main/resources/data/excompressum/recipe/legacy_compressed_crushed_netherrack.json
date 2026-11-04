@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "excompressum:compressed_crushed_netherrack"
+  ],
+  "result": {
+    "id": "exnihiloomnia:compressed_gravel_nether"
+  }
+}

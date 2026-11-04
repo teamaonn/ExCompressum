@@ -1,11 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "building",
   "ingredients": [
     "excompressum:compressed_soul_sand"
   ],
   "result": {
-    "count": 9,
-    "id": "minecraft:soul_sand"
+    "id": "exnihiloomnia:compressed_soul_sand"
   }
 }

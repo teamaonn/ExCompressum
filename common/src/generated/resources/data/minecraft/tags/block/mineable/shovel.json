@@ -1,14 +1,14 @@
 {
   "values": [
-    "excompressum:compressed_dirt",
-    "excompressum:compressed_gravel",
-    "excompressum:compressed_sand",
+    "exnihiloomnia:compressed_dirt",
+    "exnihiloomnia:compressed_gravel",
+    "exnihiloomnia:compressed_sand",
     "excompressum:compressed_crushed_andesite",
     "excompressum:compressed_crushed_diorite",
-    "excompressum:compressed_crushed_end_stone",
+    "exnihiloomnia:compressed_gravel_ender",
     "excompressum:compressed_crushed_granite",
-    "excompressum:compressed_crushed_netherrack",
-    "excompressum:compressed_dust",
-    "excompressum:compressed_soul_sand"
+    "exnihiloomnia:compressed_gravel_nether",
+    "exnihiloomnia:compressed_dust",
+    "exnihiloomnia:compressed_soul_sand"
   ]
 }

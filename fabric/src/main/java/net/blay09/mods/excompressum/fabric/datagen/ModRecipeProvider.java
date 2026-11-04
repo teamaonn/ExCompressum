@@ -486,25 +486,13 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy("has_granite", has(Items.GRANITE))
                         .save(output);
 
-                shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.compressedBlocks.get(CompressedBlockType.COBBLESTONE))
-                        .requires(Items.COBBLESTONE, 9)
-                        .unlockedBy("has_cobblestone", has(Items.COBBLESTONE))
-                        .save(output);
 
-                shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.compressedBlocks.get(CompressedBlockType.SAND))
-                        .requires(Items.SAND, 9)
-                        .unlockedBy("has_sand", has(Items.SAND))
-                        .save(output);
 
-                shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.compressedBlocks.get(CompressedBlockType.DIRT))
-                        .requires(Items.DIRT, 9)
-                        .unlockedBy("has_dirt", has(Items.DIRT))
-                        .save(output);
 
-                shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.compressedBlocks.get(CompressedBlockType.GRAVEL))
-                        .requires(Items.GRAVEL, 9)
-                        .unlockedBy("has_gravel", has(Items.GRAVEL))
-                        .save(output);
+
+
+
+
 
                 shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.compressedBlocks.get(CompressedBlockType.NETHERRACK))
                         .requires(Items.NETHERRACK, 9)
@@ -521,10 +509,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy("has_flint", has(Items.FLINT))
                         .save(output);
 
-                shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.compressedBlocks.get(CompressedBlockType.SOUL_SAND))
-                        .requires(Items.SOUL_SAND, 9)
-                        .unlockedBy("has_soul_sand", has(Items.SOUL_SAND))
-                        .save(output);
+
 
                 shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.compressedBlocks.get(CompressedBlockType.CRUSHED_ANDESITE))
                         .requires(ModItemTags.CRUSHED_ANDESITES)
@@ -565,44 +550,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy("has_crushed_granite", has(ModItemTags.CRUSHED_GRANITES))
                         .save(output);
 
-                shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.compressedBlocks.get(CompressedBlockType.DUST))
-                        .requires(ModItemTags.DUSTS)
-                        .requires(ModItemTags.DUSTS)
-                        .requires(ModItemTags.DUSTS)
-                        .requires(ModItemTags.DUSTS)
-                        .requires(ModItemTags.DUSTS)
-                        .requires(ModItemTags.DUSTS)
-                        .requires(ModItemTags.DUSTS)
-                        .requires(ModItemTags.DUSTS)
-                        .requires(ModItemTags.DUSTS)
-                        .unlockedBy("has_dust", has(ModItemTags.DUSTS))
-                        .save(output);
 
-                shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.compressedBlocks.get(CompressedBlockType.CRUSHED_END_STONE))
-                        .requires(ModItemTags.CRUSHED_END_STONES)
-                        .requires(ModItemTags.CRUSHED_END_STONES)
-                        .requires(ModItemTags.CRUSHED_END_STONES)
-                        .requires(ModItemTags.CRUSHED_END_STONES)
-                        .requires(ModItemTags.CRUSHED_END_STONES)
-                        .requires(ModItemTags.CRUSHED_END_STONES)
-                        .requires(ModItemTags.CRUSHED_END_STONES)
-                        .requires(ModItemTags.CRUSHED_END_STONES)
-                        .requires(ModItemTags.CRUSHED_END_STONES)
-                        .unlockedBy("has_crushed_end_stone", has(ModItemTags.CRUSHED_END_STONES))
-                        .save(output);
 
-                shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.compressedBlocks.get(CompressedBlockType.CRUSHED_NETHERRACK))
-                        .requires(ModItemTags.CRUSHED_NETHERRACKS)
-                        .requires(ModItemTags.CRUSHED_NETHERRACKS)
-                        .requires(ModItemTags.CRUSHED_NETHERRACKS)
-                        .requires(ModItemTags.CRUSHED_NETHERRACKS)
-                        .requires(ModItemTags.CRUSHED_NETHERRACKS)
-                        .requires(ModItemTags.CRUSHED_NETHERRACKS)
-                        .requires(ModItemTags.CRUSHED_NETHERRACKS)
-                        .requires(ModItemTags.CRUSHED_NETHERRACKS)
-                        .requires(ModItemTags.CRUSHED_NETHERRACKS)
-                        .unlockedBy("has_crushed_netherrack", has(ModItemTags.CRUSHED_NETHERRACKS))
-                        .save(output);
+
+
+
 
                 shapeless(RecipeCategory.BUILDING_BLOCKS, Blocks.ANDESITE, 9)
                         .requires(ModBlocks.compressedBlocks.get(CompressedBlockType.ANDESITE))
@@ -619,25 +571,13 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy("has_compressed_granite", has(ModBlocks.compressedBlocks.get(CompressedBlockType.GRANITE)))
                         .save(output);
 
-                shapeless(RecipeCategory.BUILDING_BLOCKS, Blocks.COBBLESTONE, 9)
-                        .requires(ModBlocks.compressedBlocks.get(CompressedBlockType.COBBLESTONE))
-                        .unlockedBy("has_compressed_cobblestone", has(ModBlocks.compressedBlocks.get(CompressedBlockType.COBBLESTONE)))
-                        .save(output);
 
-                shapeless(RecipeCategory.BUILDING_BLOCKS, Blocks.SAND, 9)
-                        .requires(ModBlocks.compressedBlocks.get(CompressedBlockType.SAND))
-                        .unlockedBy("has_compressed_sand", has(ModBlocks.compressedBlocks.get(CompressedBlockType.SAND)))
-                        .save(output);
 
-                shapeless(RecipeCategory.BUILDING_BLOCKS, Blocks.DIRT, 9)
-                        .requires(ModBlocks.compressedBlocks.get(CompressedBlockType.DIRT))
-                        .unlockedBy("has_compressed_dirt", has(ModBlocks.compressedBlocks.get(CompressedBlockType.DIRT)))
-                        .save(output);
 
-                shapeless(RecipeCategory.BUILDING_BLOCKS, Blocks.GRAVEL, 9)
-                        .requires(ModBlocks.compressedBlocks.get(CompressedBlockType.GRAVEL))
-                        .unlockedBy("has_compressed_gravel", has(ModBlocks.compressedBlocks.get(CompressedBlockType.GRAVEL)))
-                        .save(output);
+
+
+
+
 
                 shapeless(RecipeCategory.BUILDING_BLOCKS, Blocks.NETHERRACK, 9)
                         .requires(ModBlocks.compressedBlocks.get(CompressedBlockType.NETHERRACK))
@@ -654,10 +594,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy("has_compressed_flint", has(ModBlocks.compressedBlocks.get(CompressedBlockType.FLINT)))
                         .save(output);
 
-                shapeless(RecipeCategory.BUILDING_BLOCKS, Blocks.SOUL_SAND, 9)
-                        .requires(ModBlocks.compressedBlocks.get(CompressedBlockType.SOUL_SAND))
-                        .unlockedBy("has_compressed_soul_sand", has(ModBlocks.compressedBlocks.get(CompressedBlockType.SOUL_SAND)))
-                        .save(output);
+
             }
         };
     }
